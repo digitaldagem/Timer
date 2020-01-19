@@ -1,0 +1,67 @@
+body {
+  font-family: Verdana, sans-serif;
+  height: 100%;
+  margin-left: 10%;
+  object-fit: cover;
+  overflow-x: hidden;
+  width: 85%;
+}
+
+#main-time {
+  font-size: 12vw;
+  font-weight: bold;
+  margin-top: 2%;
+}
+
+#milliseconds {
+  font-size: 4vw;
+  font-weight: bold;
+}
+
+#split-time {
+  color: orange;
+  font-size: 4vw;
+  font-weight: bold;
+  margin-left: 8%;
+}
+
+#buttons {
+  margin-left: 4%;
+  margin-top: 2%;
+}
+
+button {
+  background: #000;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.3vw;
+  font-weight: bold;
+  height: 7.5vw;
+  margin-right: 10px;
+  outline: none;
+  width: 7.5vw;
+}
+
+#output-area {
+  margin-left: 15%;
+  margin-top: 2%;
+  padding-top: 2%;
+}
+
+#output {
+  background-color: #000;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  padding: 1%;
+  width: 80%;
+}
+
+#source {
+  float: right;
+}
+
+footer {
+  padding: 15%;
+}
