@@ -15,8 +15,6 @@ class Timer extends React.Component{
       resetButtonDisplay: "none",
     };
     this.timeCalculations = this.timeCalculations.bind(this);
-    this.runIntervals = this.runIntervals.bind(this);
-    this.clearIntervals = this.clearIntervals.bind(this);
     this.startMode = this.startMode.bind(this);
     this.splitMode = this.splitMode.bind(this);
     this.pauseMode = this.pauseMode.bind(this);
@@ -99,7 +97,7 @@ class Timer extends React.Component{
     const split = { "value": this.state.timeElapsed, "source": 'Split' };
     this.state.splitTimePostArray.push(split);
     this.startTime();
-    this.runIntervals();
+    this.runInterval();
   }
 
   pauseMode() {
