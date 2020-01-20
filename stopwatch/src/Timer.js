@@ -8,12 +8,6 @@ class Timer extends React.Component {
       timeElapsedArray: [],
       mainTimeElapsed: 0,
       splitTimePostArray: [],
-      mainTimeHours: '00',
-      mainTimeMinutes:  '00',
-      mainTimeSeconds:  '00',
-      mainTimeDeciseconds: '0',
-      mainTimeMilliseconds: '00',
-      mainTimeRunningDisplay: "none",
       splitTimeRunningDisplay: "none",
       pauseButtonDisplay: "none",
       splitButtonDisplay: "none",
@@ -27,7 +21,41 @@ class Timer extends React.Component {
     this.continueMode = this.continueMode.bind(this);
     this.resetMode = this.resetMode.bind(this);
   }
-  
+
+  mainTimeHours() {
+    return (('0' + Math.floor((((this.state.mainTimeElapsed / 1000) / 60) / 60))).slice(-2));
+  }
+
+  mainTimeMinutes() {
+    return (('0' + Math.floor(((this.state.mainTimeElapsed / 1000) / 60) % 60)).slice(-2));
+  }
+  mainTimeSeconds() {
+    return (('0' + Math.floor(this.state.mainTimeElapsed / 1000) % 60).slice(-2));
+  }
+
+  mainTimeDeciseconds() {
+    return ((((this.state.mainTimeElapsed / 1000).toFixed(3)).slice(-3)).slice(0, 1));
+  }
+
+  mainTimeMilliseconds() {
+    return (((this.state.mainTimeElapsed / 1000).toFixed(3).slice(-3)).slice(1, 3));
+  }
+
+  splitTimeHours() {
+    return (('0' + Math.floor((((this.state.timeElapsed / 1000) / 60) / 60))).slice(-2));
+  }
+
+  splitTimeMinutes() {
+    return (('0' + Math.floor(((this.state.timeElapsed / 1000) / 60) % 60)).slice(-2));
+  }
+  splitTimeSeconds() {
+    return (('0' + Math.floor(this.state.timeElapsed / 1000) % 60).slice(-2));
+  }
+
+  splitTimeMilliseconds() {
+    return ((this.state.timeElapsed / 1000).toFixed(3).slice(-3));
+  }
+
   startTime() {
     this.setState({ startTimeValue: Date.now() });
   }
@@ -38,18 +66,7 @@ class Timer extends React.Component {
     for (let i = 0; i < this.state.timeElapsedArray.length; i++) {
       x += this.state.timeElapsedArray[i];
     }
-    this.setState({ 
-      mainTimeElapsed: (this.state.timeElapsed + x),
-      mainTimeHours: ('0' + Math.floor((((this.state.mainTimeElapsed / 1000) / 60) / 60))).slice(-2),
-      mainTimeMinutes: ('0' + Math.floor(((this.state.mainTimeElapsed / 1000) / 60) % 60)).slice(-2),
-      mainTimeSeconds: ('0' + Math.floor(this.state.mainTimeElapsed / 1000) % 60).slice(-2),
-      mainTimeDeciseconds: (((this.state.mainTimeElapsed / 1000).toFixed(3)).slice(-3)).slice(0, 1),
-      mainTimeMilliseconds: ((this.state.mainTimeElapsed / 1000).toFixed(3).slice(-3)).slice(1, 3),
-      splitTimeHours: ('0' + Math.floor((((this.state.timeElapsed / 1000) / 60) / 60))).slice(-2),
-      splitTimeMinutes: ('0' + Math.floor(((this.state.timeElapsed / 1000) / 60) % 60)).slice(-2),
-      splitTimeSeconds: ('0' + Math.floor(this.state.timeElapsed / 1000) % 60).slice(-2),
-      splitTimeMilliseconds: ((this.state.timeElapsed / 1000).toFixed(3)).slice(-3)
-    })
+    this.setState({ mainTimeElapsed: (this.state.timeElapsed + x) });
   }
 
   runInterval() {
@@ -62,8 +79,8 @@ class Timer extends React.Component {
 
   startMode() {
     this.setState({
-      splitTimeRunningDisplay: "",
       splitTimeResetDisplay: "none",
+      splitTimeRunningDisplay: "",
       startButtonDisplay: "none",
       pauseButtonDisplay: "",
       splitButtonDisplay: "",
@@ -116,11 +133,6 @@ class Timer extends React.Component {
       timeElapsedArray: [],
       mainTimeElapsed: 0,
       splitTimePostArray: [],
-      mainTimeHours: '00',
-      mainTimeMinutes:  '00',
-      mainTimeSeconds:  '00',
-      mainTimeDeciseconds: '0',
-      mainTimeMilliseconds: '00',
       splitTimeResetDisplay: "",
       splitTimeRunningDisplay: "none",
       startButtonDisplay: "",
@@ -135,15 +147,15 @@ class Timer extends React.Component {
     return (
       <div>
         <div id="main-time">
-          {this.state.mainTimeHours}:{this.state.mainTimeMinutes}:{this.state.mainTimeSeconds}.{this.state.mainTimeDeciseconds}
-          <span id="milliseconds">{this.state.mainTimeMilliseconds}</span>
+          {this.mainTimeHours()}:{this.mainTimeMinutes()}:{this.mainTimeSeconds()}.{this.mainTimeDeciseconds()}
+          <span id="milliseconds">{this.mainTimeMilliseconds()}</span>
         </div>
         <div id="split-time">
           <span style={{ display: this.state.splitTimeResetDisplay }}>
             SPLIT TIME
           </span>
           <span style={{ display: this.state.splitTimeRunningDisplay }}>
-            {this.state.splitTimeHours}:{this.state.splitTimeMinutes}:{this.state.splitTimeSeconds}.{this.state.splitTimeMilliseconds}
+            {this.splitTimeHours()}:{this.splitTimeMinutes()}:{this.splitTimeSeconds()}.{this.splitTimeMilliseconds()}
           </span>
         </div>
         <div id="buttons">
